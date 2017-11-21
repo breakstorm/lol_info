@@ -3,16 +3,20 @@ import ChracterCard from './ChracterCard';
 
 class LolChracter extends React.Component {
 	constructor(props){
-		super(props);
+		super(props);;
 	}
 
 	render() {
-		this.props.chracterstate.map((data) => {
+		{/*this.props.chracterstate.map((data) => {
 					console.log(data.name + " : " + data.id);
-				})
+				})*/}
+
+		console.log("test.  " + typeof(this.props.clickCharacter));
 		return(
 			<div>
-				<div class="btn-group">
+				<div class="btn-group" onClick={(e) => {
+					this.props.clickCharacter(e);
+				}}>
 					<button class="btn btn-light">ㄱ</button>
 					<button class="btn btn-light">ㄴ</button>
 					<button class="btn btn-light">ㄷ</button>
@@ -32,7 +36,7 @@ class LolChracter extends React.Component {
 				<div class="card-columns">
 					{this.props.chracterstate.map((data, i) => {
 						return (
-							<ChracterCard data={data} key={i}></ChracterCard>
+							<ChracterCard data={data} key={i} clickCharacter={this.props.clickCharacter}></ChracterCard>
 						)
 					})};	
 				</div> 

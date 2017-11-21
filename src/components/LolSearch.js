@@ -1,6 +1,8 @@
 import React from 'react';
 
 class LolSearch extends React.Component {
+
+
 	render() {
 		return (
 			<div>

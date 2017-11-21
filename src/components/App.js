@@ -14,6 +14,11 @@ class App extends React.Component {
 			name: "Albatros",
 			chracterstate: ChracterState
 		}
+		this.clickCharacter = this.clickCharacter.bind(this);
+	}
+
+	clickCharacter(e) { 
+		console.log(e.target);
 	}
 
     render(){
@@ -25,7 +30,7 @@ class App extends React.Component {
 				<br></br>
 				<LolSearch />
 				<hr></hr>
-				<LolChracter image={this.state.image} name={this.state.name} chracterstate={this.state.chracterstate}/>
+				<LolChracter image={this.state.image} name={this.state.name} chracterstate={this.state.chracterstate} clickCharacter={this.clickCharacter}/>
 				<hr></hr>
 				<LolReport />
             </div>
