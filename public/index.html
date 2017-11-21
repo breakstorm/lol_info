@@ -4,6 +4,23 @@
    <head>
       <meta charset="UTF-8">
       <title>React App</title>
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+
+      <style type="text/css">
+      	.card-columns {
+      		column-count: 12;
+		  /*@include media-breakpoint-only(lg) {
+		    column-count: 12;
+		  }*/
+		  @include (min-width: 576px) {
+		    column-count: 4;
+   		  }
+   		}
+
+         .card {
+            min-height: 100px;
+         }
+      </style>
    </head>
 
    <body>

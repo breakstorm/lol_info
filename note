@@ -1,0 +1,23 @@
+캐릭터 정보 
+- 이름
+- 특징 : 탱커, 딜러, 암살, 서포트, 정글 
+- 1렙스탯 : {물리공격력, 마법공격력, 물리방버, 마법방어, 이동속도, 체력, 마력, 체력회복속도, 마력회복속도}
+- 2렙스탯 : 
+- 18렙스탯 : 
+- 레벨당 상승 수치 : {물리공격력, 마법공격력, 물리방버, 마법방어, 이동속도, 체력, 마력, 체력회복속도, 마력회복속도, 이동속도}
+
+
+1. 단순 캐릭터 정보 나열 
+2. 패치 데이터 연관관계 표현 
+3. 데이터 모으는 방법 (크롤링, 단순 복사 작업)
+4. 패치작업에서 스탯 연관 부분 표시 방법 
+=> 굳이 패치별 스탯 변화를 보여주어야 하는가? 
+=> 우선 map을 사용하여 데이터 보여주는 작업이 우선
+ 
+ 패치정보 : http://leagueoflegends.wikia.com/wiki/Patch
+ 캐릭터정보 : http://leagueoflegends.wikia.com/wiki/List_of_champions/Base_statistics
+
+ 한국 커뮤니티 : http://lol.inven.co.kr/
+ 한국 커뮤니티 : http://www.thisisgame.com/lol/
+ 미국 공식사이트 : https://na.leagueoflegends.com/en/
+ 한국 공식사이트 : http://www.leagueoflegends.co.kr/ 
