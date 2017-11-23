@@ -7,11 +7,11 @@ class LolChracter extends React.Component {
 	}
 
 	render() {
-		{/*this.props.chracterstate.map((data) => {
-					console.log(data.name + " : " + data.id);
-				})*/}
+		const mapToCharacterCard = (data) => {
+			return data.map((data, i) => {
+				return (<ChracterCard data={data} key={i} clickCharacter={this.props.clickCharacter}></ChracterCard>)
+		})}
 
-		console.log("test.  " + typeof(this.props.clickCharacter));
 		return(
 			<div>
 				<div class="btn-group" onClick={(e) => {
@@ -34,11 +34,7 @@ class LolChracter extends React.Component {
 				</div>
 				<h1></h1>
 				<div class="card-columns">
-					{this.props.chracterstate.map((data, i) => {
-						return (
-							<ChracterCard data={data} key={i} clickCharacter={this.props.clickCharacter}></ChracterCard>
-						)
-					})};	
+				<div>{mapToCharacterCard(this.props.chracterstate)}</div>
 				</div> 
 			</div>
 		)
