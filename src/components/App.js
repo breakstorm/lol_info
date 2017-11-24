@@ -18,7 +18,15 @@ class App extends React.Component {
 			chracterstate: ChracterState
 		}
 		this.clickCharacter = this.clickCharacter.bind(this);
+		this.clickBadge = this.clickBadge.bind(this);
 		this.typeSearchInput = this.typeSearchInput.bind(this);
+	}
+
+	clickBadge(e) {
+		console.log("active clickBadge")
+		this.setState({
+			searchInput: e.target.value
+		})
 	}
 
 	typeSearchInput(e) {
@@ -73,6 +81,7 @@ class App extends React.Component {
 					chracterstate={this.state.chracterstate} 
 					clickCharacter={this.clickCharacter}
 					searchInput={this.state.searchInput}
+					clickBadge={this.clickBadge}
 				/>
 				<hr></hr>
 				{this.state.selectedReportComponent ? viewReport : viewBlank }
