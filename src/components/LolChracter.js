@@ -3,13 +3,26 @@ import ChracterCard from './ChracterCard';
 
 class LolChracter extends React.Component {
 	constructor(props){
-		super(props);;
+		super(props);
 	}
 
 	render() {
 		const mapToCharacterCard = (data) => {
 			return data.map((data, i) => {
-				return (<ChracterCard data={data} key={i} clickCharacter={this.props.clickCharacter} ></ChracterCard>)
+				console.log(data)
+				if(this.props.searchInput === ''){
+					return (<ChracterCard 
+						data={data} 
+						key={i} 
+						clickCharacter={this.props.clickCharacter}
+						searchInput={this.props.searchInput} ></ChracterCard>)
+				}else if(data.name.toLowerCase().indexOf(this.props.searchInput) === 0){
+					return (<ChracterCard 
+						data={data} 
+						key={i} 
+						clickCharacter={this.props.clickCharacter}
+						searchInput={this.props.searchInput} ></ChracterCard>)
+				}
 		})}
 
 		return(
