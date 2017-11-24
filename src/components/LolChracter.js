@@ -9,7 +9,7 @@ class LolChracter extends React.Component {
 	render() {
 		const mapToCharacterCard = (data) => {
 			return data.map((data, i) => {
-				return (<ChracterCard data={data} key={i} clickCharacter={this.props.clickCharacter}></ChracterCard>)
+				return (<ChracterCard data={data} key={i} clickCharacter={this.props.clickCharacter} ></ChracterCard>)
 		})}
 
 		return(
