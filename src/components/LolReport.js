@@ -1,4 +1,5 @@
 import React from 'react';
+import ReportChart from './ReportChart';
 
 class LolReport extends React.Component {
 	constructor(props){
@@ -12,7 +13,9 @@ class LolReport extends React.Component {
 			<div class="">
 				<h2>LolReport</h2>
 				<h1></h1>
-	 			<div class="bg-primary">Reporting space</div>
+	 			<div class="">
+	 				<ReportChart></ReportChart>
+	 			</div>
 				<div class="row">
 					<div class="col-sm-3 border border-primary">{this.props.selectedCharacter.name}</div>
 					<div class="col-sm-9 border border-primary">
