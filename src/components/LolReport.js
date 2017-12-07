@@ -1,5 +1,5 @@
 import React from 'react';
-import ReportChart from './ReportChart';
+import {ReportChart} from './ReportChart';
 
 class LolReport extends React.Component {
 	constructor(props){
