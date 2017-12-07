@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import d3 from 'd3'
+
 
 export class LineChart extends React.Component {
 	propTypes(){
@@ -20,56 +20,46 @@ export class LineChart extends React.Component {
 	render(){
 		console.log("helloworld")
 
-		const data = [
-            {day:'02-11-2016',count:180},
-            {day:'02-12-2016',count:250},
-            {day:'02-13-2016',count:150},
-            {day:'02-14-2016',count:496},
-            {day:'02-15-2016',count:140},
-            {day:'02-16-2016',count:380},
-            {day:'02-17-2016',count:100},
-            {day:'02-18-2016',count:150}
-        ];
+		var data=[ { "x": 1,   "y": 5},  { "x": 20,  "y": 20},
+                 { "x": 400,  "y": 100}, { "x": 60,  "y": 40},
+                 { "x": 80,  "y": 5},  { "x": 200, "y": 60}];
 
-        const margin = {top: 5, right: 50, bottom: 20, left: 50},
+        var margin = {top: 5, right: 50, bottom: 20, left: 50},
             w = this.props.width - (margin.left + margin.right),
             h = this.props.height - (margin.top + margin.bottom);
 
-        const parseDate = d3.timeParse("%m-%d-%Y");
+        console.log(data)
 
-        data.forEach(function (d) {
-            d.date = parseDate(d.day);
-        });
-
-
-	    var x = d3.scaleTime()
-            .domain(d3.extent(data, function (d) {
+        var x = d3.time.scale()
+            .domain(d3.extent(data, (d)=> {
                 return d.date;
             }))
             .rangeRound([0, w]);
 
-        var y = d3.scaleLinear()
-            .domain([0,d3.max(data,function(d){
+        var y = d3.scale.linear()
+            .domain([0,d3.max(data,(d)=>{
                 return d.count+100;
             })])
             .range([h, 0]);
-
+        
         var line = d3.svg.line()
-            .x(function (d) {
-                return x(d.date);
+            .x( (d,i) =>{
+                return d.x;
             })
-            .y(function (d) {
-                return y(d.count);
-            }).interpolate('cardinal');
+            .y( (d) => {
+                return d.y;
+            })
 
+        console.log(data[0].x)
+        console.log(data[0].y)
 
         var transform='translate(' + margin.left + ',' + margin.top + ')';
 
 		return(
 			<div>
 				<svg width={this.props.width} height={this.props.height}>
-					<g transform={transform}>
-						<path d={line(data)}></path>
+                    <g transform={transform}>
+						<path className="line shadow" d={line(data)} strokeLinecap="round"/>
 					</g>
 				</svg>
 			</div>
@@ -107,4 +97,3 @@ export class ReportChart extends React.Component {
         )
     }
 }
-
