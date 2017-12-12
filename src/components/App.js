@@ -5,6 +5,7 @@ import LolSearch from './LolSearch';
 import LolChracter from './LolChracter';
 import LolReport from './LolReport';
 import ChracterState from './../../public/lol-champions.json'
+// import ChracterState from './../../public/lol-champions.json'
 
 class App extends React.Component {
 	constructor(props) {
@@ -23,7 +24,7 @@ class App extends React.Component {
 	}
 
 	clickBadge(e) {
-		console.log("active clickBadge")
+		{/*console.log("active clickBadge")*/}
 		this.setState({
 			searchInput: e.target.value
 		})
@@ -39,27 +40,31 @@ class App extends React.Component {
 		{/*console.log(e.target.textContent);
 				console.log(this.state.selectedReportComponent);
 				console.log(this.state.selectedCharacter);*/}
-		this.setState({
-			selectedReportComponent: 1
-		})
+		// this.setState({
+		// 	selectedReportComponent: 1
+		// })
 
-		this.state.chracterstate.forEach((v, i, a) => { 
-			if(v.name === e.target.textContent) {
-				this.setState({
-					selectedCharacter: v
-				})
-				console.log(e.target.textContent);
-				if(e.target.textContent === this.state.selectedCharacter.name){
-					this.setState({
-						selectedReportComponent: 0
-					})
-				}
-			}
-		})
+
+
+		// this.state.chracterstate.forEach((v, i, a) => { 
+		// 	if(v.name === e.target.textContent) {
+		// 		console.log(v)
+		// 		this.setState({
+		// 			selectedCharacter: v
+		// 		})
+
+		// 		// 캐릭터 카드 2번 선 
+		// 		if(e.target.textContent === this.state.selectedCharacter.name){
+		// 			this.setState({
+		// 				selectedReportComponent: 0
+		// 			})
+		// 		}
+		// 	}
+		// }) 
 	}
 
     render(){
-    	// console.log(ChracterState);
+		{/*console.log(ChracterState);*/}
     	const viewReport = (<LolReport 
     		selectedCharacter={this.state.selectedCharacter}
 		/>)

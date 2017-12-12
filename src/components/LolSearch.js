@@ -13,7 +13,7 @@ class LolSearch extends React.Component {
 			<div>
 				<h2>LolSearch</h2>
 				<div class="card">
-					<div class="card-body bg-primary">
+					<div class="card-body bg-light">
 						<div class="input-group">
 							<input 
 								class="form-control" 
@@ -22,8 +22,11 @@ class LolSearch extends React.Component {
 									console.log("a");
 									this.props.typeSearchInput(e)}}
 								value={this.props.searchInput}></input>
-							<span class="input-group-btn"><button class="btn btn-secondary" type="button">lol</button></span>
+
+							<span class="input-group-btn"><button class="btn btn-secondary" type="button">Report</button></span>
+							<span class="input-group-btn"><button class="btn btn-secondary" type="button">Erase</button></span>
 						</div>
+						
 					</div>
 				</div>
 			</div>
