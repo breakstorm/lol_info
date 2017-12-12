@@ -61,7 +61,6 @@ class App extends React.Component {
     render(){
     	// console.log(ChracterState);
     	const viewReport = (<LolReport 
-    		selectedReportComponent={this.state.selectedReportComponent}
     		selectedCharacter={this.state.selectedCharacter}
 		/>)
     	const viewBlank = (<div></div>)
