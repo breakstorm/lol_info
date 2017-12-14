@@ -4,8 +4,9 @@ import Head from './Head';
 import LolSearch from './LolSearch';
 import LolChracter from './LolChracter';
 import LolReport from './LolReport';
+import Test from './Test';
 import ChracterState from './../../public/lol-champions.json'
-// import ChracterState from './../../public/lol-champions.json'
+import ChracterJson from './../../stats.json'
 
 class App extends React.Component {
 	constructor(props) {
@@ -16,7 +17,8 @@ class App extends React.Component {
 			searchInput: '',
 			image: "test image",
 			name: "Albatros",
-			chracterstate: ChracterState
+			chracterstate: ChracterState,
+			nameArray: []
 		}
 		this.clickCharacter = this.clickCharacter.bind(this);
 		this.clickBadge = this.clickBadge.bind(this);
@@ -63,6 +65,17 @@ class App extends React.Component {
 		// }) 
 	}
 
+	componentWillMount(){
+		let tempNameArray = [];
+    	console.log(ChracterJson);
+    	for(let i in ChracterJson.keys){
+			tempNameArray.push(ChracterJson.keys[i])    		
+    	}
+    	tempNameArray.sort()
+    	this.setState({nameArray: this.state.nameArray.concat(tempNameArray)})
+    	console.log(tempNameArray)
+	}
+
     render(){
 		{/*console.log(ChracterState);*/}
     	const viewReport = (<LolReport 
@@ -70,6 +83,13 @@ class App extends React.Component {
 		/>)
     	const viewBlank = (<div></div>)
 
+    	let tempNameArray = [];
+    	for(let i in ChracterJson.keys){
+			tempNameArray.push(ChracterJson.keys[i])    		
+    	}
+    	tempNameArray.sort()
+    	console.log("this is App render");
+    	console.log(tempNameArray);
         return (
         	<div class="container">
 				<Head />
@@ -88,11 +108,16 @@ class App extends React.Component {
 					clickBadge={this.clickBadge}
 				/>
 				<hr></hr>
+				<Test 
+					nameArray={this.state.nameArray}
+				/>
+				<hr></hr>
 				{this.state.selectedReportComponent ? viewReport : viewBlank }
             </div>
     
         );
     }
 }
+
 
 export default App;
