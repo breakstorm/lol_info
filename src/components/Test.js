@@ -28,7 +28,7 @@ class Test extends React.Component{
     	)}
 
         return (
-        	<div class="card-columns">
+        	<div >
 				{mapToCharacterCard(this.props.nameArray)}
             </div>
         );

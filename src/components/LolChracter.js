@@ -32,7 +32,7 @@ class LolChracter extends React.Component {
 				/>
 				<h1></h1>
 				<div class="card-columns">
-				<div>{mapToCharacterCard(this.props.chracterstate)}</div>
+					<div>{mapToCharacterCard(this.props.chracterstate)}</div>
 				</div> 
 			</div>
 		)
