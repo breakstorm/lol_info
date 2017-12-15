@@ -8,10 +8,10 @@ class ChracterCard extends React.Component {
 	render() {
 		return (
 			<div class="card bg-secondary">
-				<img src="" alt={this.props.data.id} />
+				<img src="" alt={this.props.key} />
 				<div class="card-img-overlay" onClick={(e)=>{
 					this.props.clickCharacter(e);
-			}}>{this.props.data.name}</div>
+			}}>{this.props.data}</div>
 			</div>
 		)
 	}
