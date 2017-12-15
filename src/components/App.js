@@ -14,7 +14,8 @@ class App extends React.Component {
 		super(props);
 		this.state = {
 			selectedReportComponent: 0,
-			selectedCharacter: {},
+			selectedCount: 0,
+			selectedCharacter: [],
 			searchInput: '',
 			image: "test image",
 			name: "Albatros",
@@ -44,18 +45,28 @@ class App extends React.Component {
 		{/*console.log(e.target.textContent);
 				console.log(this.state.selectedReportComponent);
 				console.log(this.state.selectedCharacter);*/}
+		/* LolReport1&2 공통 사용하던 기능 */
 		this.setState({
 			selectedReportComponent: 1
 		})
+		console.log("count event : " + this.state.selectedCount)
 
+		this.setState((prevState, props) => ({
+		    selectedCount: prevState.selectedCount + 1
+		})); 
+
+
+		/* LolReport2 Component에서 사용하던 기능 */
 		if(this.state.chracterjson.data[e.target.textContent]){
 			console.log("click event clear")
 			console.log(this.state.chracterjson.data[e.target.textContent])
 			this.setState({
-				selectedCharacter: this.state.chracterjson.data[e.target.textContent]
+				selectedCharacter: this.state.selectedCharacter.concat(this.state.chracterjson.data[e.target.textContent])
 			})
+			console.log(this.state.selectedCharacter)
 		}
 
+		/* LolReport1 Component에서 사용하던 기능 */
 		// this.state.chracterstat.forEach((v, i, a) => { 
 		// 	if(v.name === e.target.textContent) {
 		// 		console.log(v)
@@ -98,6 +109,7 @@ class App extends React.Component {
     	tempNameArray.sort()
     	console.log("this is App render");
     	console.log(tempNameArray);
+    	console.log("count event : " + this.state.selectedCount)
         return (
         	<div class="container">
 				<Head />
