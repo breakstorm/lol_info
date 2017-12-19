@@ -22,7 +22,7 @@ class LolReport2 extends React.Component {
 		console.log(this.props.selectedCharacter);
 
 		function formula(b, g, level){
-			return b + g * level * (0.685 + 0.0175 * (level+1))
+			return Math.round(b + g * level * (0.685 + 0.0175 * (level+1)));
 		}
 		/* 레벨 숫자값 부분 */
 		let levelArray = []
@@ -36,10 +36,12 @@ class LolReport2 extends React.Component {
 			stats[j] = new Array();
 			let base = this.props.selectedCharacter[j].stats.attackdamage;
 			let growth = this.props.selectedCharacter[j].stats.attackdamageperlevel;
-			for(let k = 0; k < 18; k++){
+			stats[j][0] = this.props.selectedCharacter[j].name;
+			for(let k = 1; k < 19; k++){
 				stats[j][k] = formula(base, growth, k);
 			}
 		}
+		console.log("LolReport2 component stats : ")
 		console.log(stats);
 
 		const head = (data) => {
@@ -87,7 +89,6 @@ class LolReport2 extends React.Component {
 		 			</thead>
 		 			<tbody>
 		 				<tr>
-			 				{chracterHead(this.props.selectedCharacter)}
 			 				{chracterContent(stats)}
 			 			</tr>
 		 			</tbody>
