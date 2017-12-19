@@ -118,7 +118,6 @@ class App extends React.Component {
     	console.log("count event : " + this.state.thisCount)
         return (
         	<div class="container">
-				<Head />
 				<br></br>
 				<LolSearch 
 					typeSearchInput={this.typeSearchInput}
@@ -136,7 +135,6 @@ class App extends React.Component {
 				{/*<Test 
 									nameArray={this.state.nameArray}
 								/>*/}
-				<hr></hr>
 				{this.state.selectedReportComponent ? viewReport : viewBlank }
             </div>
     

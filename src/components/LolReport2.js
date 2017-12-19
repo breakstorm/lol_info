@@ -19,7 +19,7 @@ class LolReport2 extends React.Component {
 		function formula(b, g, level){
 			return Math.round(b + g * level * (0.685 + 0.0175 * (level+1)));
 		}
-		console.log("LolReport2 Component : ")
+		console.log("LolReport2 Component selectedCharacter : ")
 		console.log(this.props.selectedCharacter)
 
 
@@ -39,7 +39,17 @@ class LolReport2 extends React.Component {
 			for(let k = 1; k < 19; k++){
 				stats[j][k] = formula(base, growth, k);
 			}
+			if(this.props.selectedCharacter.length === 2 && j === 1){
+				console.log("enter check")
+				stats[2] = new Array();
+				stats[2][0] = stats[0][0] + " - " + stats[1][0];		
+				for(let k = 1; k < 19; k++){
+					stats[2][k] = stats[0][k] - stats[1][k];		
+				}
+			}
 		}
+		console.log("LolReport2 Component stats : ")
+		console.log(stats)
 		
 
 		const head = (data) => {
