@@ -64,8 +64,8 @@ class LolReport2 extends React.Component {
 			})
 		}
 		
-		const chracterStats = (data) => {
-			for(let i = 0; data.length; i++){
+		const chracterStats = (data, index) => {
+			for(let i = index; i < data.length; i++){
 				return data[i].map((v,i) =>{
 					console.log("test : " + v)
 					return (<CharacterStats data={v} key={i} />)	
@@ -89,7 +89,13 @@ class LolReport2 extends React.Component {
 		 			</thead>
 		 			<tbody>
 		 				<tr>
-			 				{chracterContent(stats)}
+			 				{chracterStats(stats, 0)}
+			 			</tr>
+			 			<tr>
+			 				{chracterStats(stats, 1)}
+			 			</tr>
+			 			<tr>
+			 				{chracterStats(stats, 2)}
 			 			</tr>
 		 			</tbody>
 	 			</table>
