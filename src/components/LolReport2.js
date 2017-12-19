@@ -1,4 +1,6 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import {ReportChart} from './ReportChart';
 import TableHead from './TableHead';
 import StatsBadge from './StatsBadge';
@@ -12,18 +14,15 @@ class LolReport2 extends React.Component {
 		
 	}
 
-	componentWillMount() {
-		
-		
-	}
 
 	render() {
-		console.log("LolReport2 component : ")
-		console.log(this.props.selectedCharacter);
-
 		function formula(b, g, level){
 			return Math.round(b + g * level * (0.685 + 0.0175 * (level+1)));
 		}
+		console.log("LolReport2 Component : ")
+		console.log(this.props.selectedCharacter)
+
+
 		/* 레벨 숫자값 부분 */
 		let levelArray = []
 		for(let i = 1; i < 19; i++){
@@ -41,8 +40,7 @@ class LolReport2 extends React.Component {
 				stats[j][k] = formula(base, growth, k);
 			}
 		}
-		console.log("LolReport2 component stats : ")
-		console.log(stats);
+		
 
 		const head = (data) => {
 			return data.map((v, i) => {
@@ -67,7 +65,6 @@ class LolReport2 extends React.Component {
 		const chracterStats = (data, index) => {
 			for(let i = index; i < data.length; i++){
 				return data[i].map((v,i) =>{
-					console.log("test : " + v)
 					return (<CharacterStats data={v} key={i} />)	
 				})
 			}
@@ -102,6 +99,15 @@ class LolReport2 extends React.Component {
 			</div>
 		)
 	}
+}
+
+LolReport2.defaultProps = {
+	thisCount: 0,
+	selectedCount: 0
+}
+LolReport2.propTypes = {
+	thisCount: PropTypes.number,
+	selectedCount: PropTypes.number
 }
 
 export default LolReport2;

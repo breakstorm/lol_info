@@ -15,6 +15,7 @@ class App extends React.Component {
 		this.state = {
 			selectedReportComponent: 0,
 			selectedCount: 0,
+			thisCount: 1,
 			selectedCharacter: [],
 			searchInput: '',
 			image: "test image",
@@ -51,13 +52,15 @@ class App extends React.Component {
 		})
 		console.log("count event : " + this.state.selectedCount)
 
+		/* LolReport2 Component에서 사용하던 기능 */
 		this.setState((prevState, props) => ({
-		    selectedCount: prevState.selectedCount + 1
+		    selectedCount: prevState.selectedCount + 1,
+		    thisCount: (prevState.thisCount + 1)%2
 		})); 
 
 
 		/* LolReport2 Component에서 사용하던 기능 */
-		if(this.state.chracterjson.data[e.target.textContent]){
+		if(this.state.chracterjson.data[e.target.textContent] && this.state.selectedCount < 2){
 			console.log("click event clear")
 			console.log(this.state.chracterjson.data[e.target.textContent])
 			this.setState({
@@ -99,6 +102,8 @@ class App extends React.Component {
 		{/*console.log(ChracterState);*/}
     	const viewReport = (<LolReport2 
     		selectedCharacter={this.state.selectedCharacter}
+    		selectedCount={this.state.selectedCount}
+    		thisCount={this.state.thisCount}
 		/>)
     	const viewBlank = (<div></div>)
 
@@ -110,6 +115,7 @@ class App extends React.Component {
     	console.log("this is App render");
     	console.log(tempNameArray);
     	console.log("count event : " + this.state.selectedCount)
+    	console.log("count event : " + this.state.thisCount)
         return (
         	<div class="container">
 				<Head />
