@@ -34,9 +34,10 @@ class LolReport2 extends React.Component {
 		for(let j = 0; j < this.props.selectedCharacter.length; j++){
 			stats[j] = new Array();
 			let base = this.props.selectedCharacter[j].stats.attackdamage;
+			stats[j][1] = Math.round(base);
 			let growth = this.props.selectedCharacter[j].stats.attackdamageperlevel;
 			stats[j][0] = this.props.selectedCharacter[j].name;
-			for(let k = 1; k < 19; k++){
+			for(let k = 2; k < 19; k++){
 				stats[j][k] = formula(base, growth, k);
 			}
 			if(this.props.selectedCharacter.length === 2 && j === 1){
@@ -44,13 +45,14 @@ class LolReport2 extends React.Component {
 				stats[2] = new Array();
 				stats[2][0] = stats[0][0] + " - " + stats[1][0];		
 				for(let k = 1; k < 19; k++){
-					stats[2][k] = stats[0][k] - stats[1][k];		
+					stats[2][k] = Math.round(stats[0][k] - stats[1][k]);		
 				}
 			}
 		}
 		console.log("LolReport2 Component stats : ")
 		console.log(stats)
 		
+		const viewBlank = (<div></div>)
 
 		const head = (data) => {
 			return data.map((v, i) => {
@@ -106,6 +108,34 @@ class LolReport2 extends React.Component {
 			 			</tr>
 		 			</tbody>
 	 			</table>
+
+
+	 			<div className="row">
+	 				<div className="col-sm-3">
+	 					<div className="card bg-light">{this.props.selectedCharacter[0].name}</div>
+	 				</div>
+	 				<div className="col-sm-9">
+	 					<div className="card bg-light">
+	 						<div> Title : {this.props.selectedCharacter[0].title}</div>
+	 						<div> AttackDamage : {this.props.selectedCharacter[0].stats.attackdamage} / Armor : {this.props.selectedCharacter[0].stats.armor} / HP : {this.props.selectedCharacter[0].stats.hp} / Spellblock : {this.props.selectedCharacter[0].stats.spellblock}</div>
+	 					</div>
+	 				</div>
+	 			</div>
+
+	 			{this.props.thisCount === 1 ? 
+ 					<div className="row">
+		 				<div className="col-sm-3">
+		 					<div className="card bg-light">{this.props.selectedCharacter[1].name}</div>
+		 				</div>
+		 				<div className="col-sm-9">
+		 					<div className="card bg-light">
+		 						<div> Title : {this.props.selectedCharacter[1].title}</div>
+		 						<div> AttackDamage : {this.props.selectedCharacter[1].stats.attackdamage} / Armor : {this.props.selectedCharacter[0].stats.armor} / HP : {this.props.selectedCharacter[0].stats.hp} / Spellblock : {this.props.selectedCharacter[0].stats.spellblock}</div>
+		 					</div>
+		 				</div>
+		 			</div>
+	 				: viewBlank }
+
 			</div>
 		)
 	}
