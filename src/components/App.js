@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import update from 'react-addons-update'
 import Head from './Head';
 import LolSearch from './LolSearch';
 import LolChracter from './LolChracter';
@@ -46,26 +47,57 @@ class App extends React.Component {
 		{/*console.log(e.target.textContent);
 				console.log(this.state.selectedReportComponent);
 				console.log(this.state.selectedCharacter);*/}
+
 		/* LolReport1&2 공통 사용하던 기능 */
 		this.setState({
 			selectedReportComponent: 1
 		})
-		console.log("count event : " + this.state.selectedCount)
+		let skipSelect = 1;
 
-		/* LolReport2 Component에서 사용하던 기능 */
-		this.setState((prevState, props) => ({
-		    selectedCount: prevState.selectedCount + 1,
-		    thisCount: (prevState.thisCount + 1)%2
-		})); 
+		
 
+		console.log("clickevent length test : ");
+		console.log(this.state.selectedCharacter.length)
+		console.log(this.state.selectedCharacter)
 
-		/* LolReport2 Component에서 사용하던 기능 */
-		if(this.state.chracterjson.data[e.target.textContent] && this.state.selectedCount < 2){
+		/* LolReport2 Component에서 사용하는 기능 : 토글 처리문*/
+		if(this.state.selectedCharacter.length > 0){
+			console.log("check please : ")
+			skipSelect = 0;
+			for(let i = 0; i < this.state.selectedCharacter.length; i++){
+				if(this.state.selectedCharacter[i].name === e.target.textContent){
+					console.log("crush error !!!")
+					// console.log(this.state.selectedCharacter)
+					// let temp = this.state.selectedCharacter.slice(0)
+					// console.log(temp)
+					this.setState({
+						selectedCharacter: update(this.state.selectedCharacter, 
+						{
+							$splice:[[i,1]]
+						})
+					})
+				}
+			}
+			this.setState((prevState, props) => ({
+			    selectedCount: prevState.selectedCount - 1,
+			    thisCount: (2 - prevState.thisCount - 1) % 2
+			})); 
+			return
+		}		
+
+		console.log("click test 2")
+		/* LolReport2 Component에서 사용하는 기능 : 해당 캐릭터 정보 저장*/
+		if(this.state.chracterjson.data[e.target.textContent] && this.state.selectedCount < 2 ){
 			console.log("click event clear")
 			console.log(this.state.chracterjson.data[e.target.textContent])
 			this.setState({
 				selectedCharacter: this.state.selectedCharacter.concat(this.state.chracterjson.data[e.target.textContent])
 			})
+			/* LolReport2 Component에서 사용하던 기능 */
+			this.setState((prevState, props) => ({
+			    selectedCount: prevState.selectedCount + 1,
+			    thisCount: (prevState.thisCount + 1)%2
+			})); 
 			console.log(this.state.selectedCharacter)
 		}
 

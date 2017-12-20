@@ -85,44 +85,48 @@ class LolReport2 extends React.Component {
 
 		return (
 			<div class="">
-				<h2>LolReport</h2>
-				<StatsBadge />
-				<h1></h1>
+				{this.props.selectedCharacter.length > 0 ? 
+					<div>
+						<h2>LolReport</h2>
+						<StatsBadge />
+						<h1></h1>
+						<table className="table">
+			 				<thead >
+					 			<tr>
+					 				<th scope='col'>Lv.</th>
+					 				{head(levelArray)}
+					 			</tr>
+				 			</thead>
+				 			<tbody>
+				 				<tr>
+					 				{chracterStats(stats, 0)}
+					 			</tr>
+					 			<tr>
+					 				{chracterStats(stats, 1)}
+					 			</tr>
+					 			<tr>
+					 				{chracterStats(stats, 2)}
+					 			</tr>
+				 			</tbody>
+			 			</table>
 
-	 			<table className="table">
-	 				<thead >
-			 			<tr>
-			 				<th scope='col'>Lv.</th>
-			 				{head(levelArray)}
-			 			</tr>
-		 			</thead>
-		 			<tbody>
-		 				<tr>
-			 				{chracterStats(stats, 0)}
-			 			</tr>
-			 			<tr>
-			 				{chracterStats(stats, 1)}
-			 			</tr>
-			 			<tr>
-			 				{chracterStats(stats, 2)}
-			 			</tr>
-		 			</tbody>
-	 			</table>
 
+			 			<div className="row">
+			 				<div className="col-sm-3">
+			 					<div className="card bg-light">{this.props.selectedCharacter[0].name}</div>
+			 				</div>
+			 				<div className="col-sm-9">
+			 					<div className="card bg-light">
+			 						<div> Title : {this.props.selectedCharacter[0].title}</div>
+			 						<div> AttackDamage : {this.props.selectedCharacter[0].stats.attackdamage} / Armor : {this.props.selectedCharacter[0].stats.armor} / HP : {this.props.selectedCharacter[0].stats.hp} / Spellblock : {this.props.selectedCharacter[0].stats.spellblock}</div>
+			 					</div>
+			 				</div>
+			 			</div>
+		 			</div>
+					: viewBlank}
+	 			
 
-	 			<div className="row">
-	 				<div className="col-sm-3">
-	 					<div className="card bg-light">{this.props.selectedCharacter[0].name}</div>
-	 				</div>
-	 				<div className="col-sm-9">
-	 					<div className="card bg-light">
-	 						<div> Title : {this.props.selectedCharacter[0].title}</div>
-	 						<div> AttackDamage : {this.props.selectedCharacter[0].stats.attackdamage} / Armor : {this.props.selectedCharacter[0].stats.armor} / HP : {this.props.selectedCharacter[0].stats.hp} / Spellblock : {this.props.selectedCharacter[0].stats.spellblock}</div>
-	 					</div>
-	 				</div>
-	 			</div>
-
-	 			{this.props.thisCount === 1 ? 
+	 			{this.props.thisCount === 1 && this.props.selectedCharacter.length > 1 ? 
  					<div className="row">
 		 				<div className="col-sm-3">
 		 					<div className="card bg-light">{this.props.selectedCharacter[1].name}</div>
