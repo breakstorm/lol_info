@@ -10,8 +10,7 @@ import CharacterStats from './CharacterStats';
 
 class LolReport2 extends React.Component {
 	constructor(props){
-		super(props);
-		
+		super(props);	
 	}
 
 
@@ -21,7 +20,8 @@ class LolReport2 extends React.Component {
 		}
 		console.log("LolReport2 Component selectedCharacter : ")
 		console.log(this.props.selectedCharacter)
-
+		console.log("LolReport2 Component statsInput : ")
+		console.log(this.props.statsInput)
 
 		/* 레벨 숫자값 부분 */
 		let levelArray = []
@@ -29,13 +29,17 @@ class LolReport2 extends React.Component {
 			levelArray.push(i)
 		}
 
+		let tempStatsInput = this.props.statsInput + "perlevel"
+		console.log("LolReport2 Component tempStatsInput : ")
+		console.log(tempStatsInput)
+
 		/* 능력치 연산 부분 */
 		let stats = [];
 		for(let j = 0; j < this.props.selectedCharacter.length; j++){
 			stats[j] = new Array();
-			let base = this.props.selectedCharacter[j].stats.attackdamage;
+			let base = this.props.selectedCharacter[j].stats[this.props.statsInput];
 			stats[j][1] = Math.round(base);
-			let growth = this.props.selectedCharacter[j].stats.attackdamageperlevel;
+			let growth = this.props.selectedCharacter[j].stats[tempStatsInput];
 			stats[j][0] = this.props.selectedCharacter[j].name;
 			for(let k = 2; k < 19; k++){
 				stats[j][k] = formula(base, growth, k);
@@ -49,8 +53,6 @@ class LolReport2 extends React.Component {
 				}
 			}
 		}
-		console.log("LolReport2 Component stats : ")
-		console.log(stats)
 		
 		const viewBlank = (<div></div>)
 
@@ -88,7 +90,9 @@ class LolReport2 extends React.Component {
 				{this.props.selectedCharacter.length > 0 ? 
 					<div>
 						<h2>LolReport</h2>
-						<StatsBadge />
+						<StatsBadge 
+							clickStatsBadge={this.props.clickStatsBadge}
+						/>
 						<h1></h1>
 						<table className="table">
 			 				<thead >
@@ -145,13 +149,16 @@ class LolReport2 extends React.Component {
 	}
 }
 
-LolReport2.defaultProps = {
-	thisCount: 0,
-	selectedCount: 0
-}
 LolReport2.propTypes = {
 	thisCount: PropTypes.number,
-	selectedCount: PropTypes.number
+	selectedCount: PropTypes.number,
+	statsInput: PropTypes.string
 }
+LolReport2.defaultProps = {
+	thisCount: 0,
+	selectedCount: 0,
+	statsInput: 'attackdamage'
+}
+
 
 export default LolReport2;

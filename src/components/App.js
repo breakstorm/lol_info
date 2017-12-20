@@ -19,6 +19,7 @@ class App extends React.Component {
 			thisCount: 1,
 			selectedCharacter: [],
 			searchInput: '',
+			statsInput: 'attackdamage',
 			image: "test image",
 			name: "Albatros",
 			chracterstate: ChracterState,
@@ -27,6 +28,7 @@ class App extends React.Component {
 		}
 		this.clickCharacter = this.clickCharacter.bind(this);
 		this.clickBadge = this.clickBadge.bind(this);
+		this.clickStatsBadge = this.clickStatsBadge.bind(this);
 		this.typeSearchInput = this.typeSearchInput.bind(this);
 	}
 
@@ -52,9 +54,6 @@ class App extends React.Component {
 		this.setState({
 			selectedReportComponent: 1
 		})
-		let skipSelect = 1;
-
-		
 
 		console.log("clickevent length test : ");
 		console.log(this.state.selectedCharacter.length)
@@ -67,22 +66,19 @@ class App extends React.Component {
 			for(let i = 0; i < this.state.selectedCharacter.length; i++){
 				if(this.state.selectedCharacter[i].name === e.target.textContent){
 					console.log("crush error !!!")
-					// console.log(this.state.selectedCharacter)
-					// let temp = this.state.selectedCharacter.slice(0)
-					// console.log(temp)
 					this.setState({
 						selectedCharacter: update(this.state.selectedCharacter, 
 						{
 							$splice:[[i,1]]
 						})
 					})
+					this.setState((prevState, props) => ({
+					    selectedCount: prevState.selectedCount - 1,
+					    thisCount: (2 - prevState.thisCount - 1) % 2
+					}));
+					return
 				}
 			}
-			this.setState((prevState, props) => ({
-			    selectedCount: prevState.selectedCount - 1,
-			    thisCount: (2 - prevState.thisCount - 1) % 2
-			})); 
-			return
 		}		
 
 		console.log("click test 2")
@@ -100,23 +96,14 @@ class App extends React.Component {
 			})); 
 			console.log(this.state.selectedCharacter)
 		}
+	}
 
-		/* LolReport1 Component에서 사용하던 기능 */
-		// this.state.chracterstat.forEach((v, i, a) => { 
-		// 	if(v.name === e.target.textContent) {
-		// 		console.log(v)
-		// 		this.setState({
-		// 			selectedCharacter: v
-		// 		})
-
-		// 		// 캐릭터 카드 2번 선 
-		// 		if(e.target.textContent === this.state.selectedCharacter.name){
-		// 			this.setState({
-		// 				selectedReportComponent: 0
-		// 			})
-		// 		}
-		// 	}
-		// }) 
+	clickStatsBadge(e) {
+		console.log("this is clickStatsBadge")
+		console.log(e.target.firstElementChild.value)
+		this.setState({
+			statsInput: e.target.firstElementChild.value 
+		})
 	}
 
 	componentWillMount(){
@@ -136,6 +123,8 @@ class App extends React.Component {
     		selectedCharacter={this.state.selectedCharacter}
     		selectedCount={this.state.selectedCount}
     		thisCount={this.state.thisCount}
+    		clickStatsBadge={this.clickStatsBadge}
+    		statsInput={this.state.statsInput}
 		/>)
     	const viewBlank = (<div></div>)
 
@@ -164,9 +153,6 @@ class App extends React.Component {
 					clickBadge={this.clickBadge}
 				/>
 				<hr></hr>
-				{/*<Test 
-									nameArray={this.state.nameArray}
-								/>*/}
 				{this.state.selectedReportComponent ? viewReport : viewBlank }
             </div>
     
