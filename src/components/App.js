@@ -62,7 +62,6 @@ class App extends React.Component {
 		/* LolReport2 Component에서 사용하는 기능 : 토글 처리문*/
 		if(this.state.selectedCharacter.length > 0){
 			console.log("check please : ")
-			skipSelect = 0;
 			for(let i = 0; i < this.state.selectedCharacter.length; i++){
 				if(this.state.selectedCharacter[i].name === e.target.textContent){
 					console.log("crush error !!!")
@@ -135,8 +134,8 @@ class App extends React.Component {
     	tempNameArray.sort()
     	console.log("this is App render");
     	console.log(tempNameArray);
-    	console.log("count event : " + this.state.selectedCount)
-    	console.log("count event : " + this.state.thisCount)
+    	console.log("selectedCount event : " + this.state.selectedCount)
+    	console.log("thisCount event : " + this.state.thisCount)
         return (
         	<div class="container">
 				<br></br>
