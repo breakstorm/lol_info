@@ -1,45 +1,60 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import {ReportChart} from './ReportChart';
 import TableHead from './TableHead';
 import StatsBadge from './StatsBadge';
 import CharacterHead from './CharacterHead';
 import CharacterContent from './CharacterContent';
+import CharacterStats from './CharacterStats';
 
 class LolReport2 extends React.Component {
 	constructor(props){
-		super(props);
+		super(props);	
 	}
 
+
 	render() {
-		console.log("LolReport2 component : ")
-		console.log(this.props.selectedCharacter);
-
 		function formula(b, g, level){
-			return b + g * level * (0.685 + 0.0175 * (level+1))
+			return Math.round(b + g * level * (0.685 + 0.0175 * (level+1)));
 		}
+		console.log("LolReport2 Component selectedCharacter : ")
+		console.log(this.props.selectedCharacter)
+		console.log("LolReport2 Component statsInput : ")
+		console.log(this.props.statsInput)
 
+		/* 레벨 숫자값 부분 */
 		let levelArray = []
 		for(let i = 1; i < 19; i++){
 			levelArray.push(i)
 		}
+
+		let tempStatsInput = this.props.statsInput + "perlevel"
+		console.log("LolReport2 Component tempStatsInput : ")
+		console.log(tempStatsInput)
+
 		/* 능력치 연산 부분 */
-		let characterStats = [];
-		// for(let j = 0; j < this.props.selectedCharacter.length; j++){
-		// 	characterStats = new Array();
-		// }
+		let stats = [];
 		for(let j = 0; j < this.props.selectedCharacter.length; j++){
-			characterStats[j] = new Array();
-			let base = this.props.selectedCharacter[j].stats.attackdamage;
-			let growth = this.props.selectedCharacter[j].stats.attackdamageperlevel;
-			for(let k = 0; k < 18; k++){
-				characterStats[j][k] = formula(base, growth, k);
+			stats[j] = new Array();
+			let base = this.props.selectedCharacter[j].stats[this.props.statsInput];
+			stats[j][1] = Math.round(base);
+			let growth = this.props.selectedCharacter[j].stats[tempStatsInput];
+			stats[j][0] = this.props.selectedCharacter[j].name;
+			for(let k = 2; k < 19; k++){
+				stats[j][k] = formula(base, growth, k);
+			}
+			if(this.props.selectedCharacter.length === 2 && j === 1){
+				console.log("enter check")
+				stats[2] = new Array();
+				stats[2][0] = stats[0][0] + " - " + stats[1][0];		
+				for(let k = 1; k < 19; k++){
+					stats[2][k] = Math.round(stats[0][k] - stats[1][k]);		
+				}
 			}
 		}
-		// for(let j = 0; j < 18; j++){
-		// 	characterStats[j] = test(j);
-		// }
-		console.log(characterStats);
-
+		
+		const viewBlank = (<div></div>)
 
 		const head = (data) => {
 			return data.map((v, i) => {
@@ -49,40 +64,101 @@ class LolReport2 extends React.Component {
 
 		const chracterHead = (data) => {
 			return data.map((v, i) =>{
-				return (<CharacterHead data={v} key={i} />)
+					return (<CharacterHead data={v} key={i} />)
 			})
 		}
 
 		const chracterContent = (data) => {
-			return data.map((v, i) =>{
-				return (<CharacterContent data={v} key={i} />)
+			return data.map((data2, i) =>{
+				return data2.map((v,i) =>{
+					return (<CharacterStats data={v} key={i} />)	
+				})
 			})
+		}
+		
+		const chracterStats = (data, index) => {
+			for(let i = index; i < data.length; i++){
+				return data[i].map((v,i) =>{
+					return (<CharacterStats data={v} key={i} />)	
+				})
+			}
 		}
 
 
 		return (
 			<div class="">
-				<h2>LolReport</h2>
-				<StatsBadge />
-				<h1></h1>
+				{this.props.selectedCharacter.length > 0 ? 
+					<div>
+						<h2>LolReport</h2>
+						<StatsBadge 
+							clickStatsBadge={this.props.clickStatsBadge}
+						/>
+						<h1></h1>
+						<table className="table">
+			 				<thead >
+					 			<tr>
+					 				<th scope='col'>Lv.</th>
+					 				{head(levelArray)}
+					 			</tr>
+				 			</thead>
+				 			<tbody>
+				 				<tr>
+					 				{chracterStats(stats, 0)}
+					 			</tr>
+					 			<tr>
+					 				{chracterStats(stats, 1)}
+					 			</tr>
+					 			<tr>
+					 				{chracterStats(stats, 2)}
+					 			</tr>
+				 			</tbody>
+			 			</table>
 
-	 			<table className="table">
-	 				<thead >
-			 			<tr>
-			 				<th scope='col'>Lv.</th>
-			 				{head(levelArray)}
-			 			</tr>
-		 			</thead>
-		 			<tbody>
-		 				<tr>
-			 				{chracterHead(this.props.selectedCharacter)}
-			 				{chracterContent(this.props.selectedCharacter)}
-			 			</tr>
-		 			</tbody>
-	 			</table>
+
+			 			<div className="row">
+			 				<div className="col-sm-3">
+			 					<div className="card bg-light">{this.props.selectedCharacter[0].name}</div>
+			 				</div>
+			 				<div className="col-sm-9">
+			 					<div className="card bg-light">
+			 						<div> Title : {this.props.selectedCharacter[0].title}</div>
+			 						<div> AttackDamage : {this.props.selectedCharacter[0].stats.attackdamage} / Armor : {this.props.selectedCharacter[0].stats.armor} / HP : {this.props.selectedCharacter[0].stats.hp} / Spellblock : {this.props.selectedCharacter[0].stats.spellblock}</div>
+			 					</div>
+			 				</div>
+			 			</div>
+		 			</div>
+					: viewBlank}
+	 			
+
+	 			{this.props.thisCount === 1 && this.props.selectedCharacter.length > 1 ? 
+ 					<div className="row">
+		 				<div className="col-sm-3">
+		 					<div className="card bg-light">{this.props.selectedCharacter[1].name}</div>
+		 				</div>
+		 				<div className="col-sm-9">
+		 					<div className="card bg-light">
+		 						<div> Title : {this.props.selectedCharacter[1].title}</div>
+		 						<div> AttackDamage : {this.props.selectedCharacter[1].stats.attackdamage} / Armor : {this.props.selectedCharacter[0].stats.armor} / HP : {this.props.selectedCharacter[0].stats.hp} / Spellblock : {this.props.selectedCharacter[0].stats.spellblock}</div>
+		 					</div>
+		 				</div>
+		 			</div>
+	 				: viewBlank }
+
 			</div>
 		)
 	}
 }
+
+LolReport2.propTypes = {
+	thisCount: PropTypes.number,
+	selectedCount: PropTypes.number,
+	statsInput: PropTypes.string
+}
+LolReport2.defaultProps = {
+	thisCount: 0,
+	selectedCount: 0,
+	statsInput: 'attackdamage'
+}
+
 
 export default LolReport2;

@@ -8,16 +8,16 @@ class StatsBadge extends React.Component{
     render(){
         return (
             <div class="btn-group" data-toggle="buttons">
-			  <label class="btn btn-secondary active">
+			  <label class="btn btn-secondary active"  onClick={this.props.clickStatsBadge}>
 			    <input type="radio" checked autocomplete="off" value="attackdamage"/>attackdamage
 			  </label>
-			  <label class="btn btn-secondary">
+			  <label class="btn btn-secondary"  onClick={this.props.clickStatsBadge}>
 			    <input type="radio" autocomplete="off" value="armor"/>armor
 			  </label>
-			  <label class="btn btn-secondary">
-			    <input type="radio" autocomplete="off" value="hp"/>hp
+			  <label class="btn btn-secondary"  onClick={this.props.clickStatsBadge}>
+			    <input type="radio" autocomplete="off" value="hp" />hp
 			  </label>
-			  <label class="btn btn-secondary">
+			  <label class="btn btn-secondary"  onClick={this.props.clickStatsBadge}>
 			    <input type="radio" autocomplete="off" value="spellblock"/>spellblock
 			  </label>
 			</div>
