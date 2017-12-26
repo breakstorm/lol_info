@@ -1,6 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import update from 'react-addons-update'
+import update from 'react-addons-update';
+import { instanceOf } from 'prop-types';
+
 import Head from './Head';
 import LolSearch from './LolSearch';
 import LolChracter from './LolChracter';
@@ -11,11 +13,13 @@ import ChracterState from './../../public/lol-champions.json'
 import ChracterJson from './../../stats.json'
 
 class App extends React.Component {
+
 	constructor(props) {
 		super(props);
 		this.state = {
 			selectedReportComponent: 0,
 			selectedCount: 0,
+			selectedFocusState: 0,
 			thisCount: 1,
 			selectedCharacter: [],
 			searchInput: '',
@@ -30,6 +34,8 @@ class App extends React.Component {
 		this.clickBadge = this.clickBadge.bind(this);
 		this.clickStatsBadge = this.clickStatsBadge.bind(this);
 		this.typeSearchInput = this.typeSearchInput.bind(this);
+		this.onFocusSearchInput = this.onFocusSearchInput.bind(this);
+		this.outFocusSearchInput = this.outFocusSearchInput.bind(this);
 	}
 
 	clickBadge(e) {
@@ -44,6 +50,18 @@ class App extends React.Component {
 		this.setState({
 			searchInput: e.target.value
 		})
+	}
+	onFocusSearchInput(e){
+		console.log("onFocusSearchInput event");
+		this.setState((prevState, props) => {
+			return {selectedFocusState: !prevState.selectedFocusState}
+		})
+	}
+	outFocusSearchInput(e){
+		console.log("outFocusSearchInput event");
+		this.setState((prevState, props) => {
+			return {selectedFocusState: 0}
+		})	
 	}
 
 	clickCharacter(e) { 
@@ -94,8 +112,28 @@ class App extends React.Component {
 			    selectedCount: prevState.selectedCount + 1,
 			    thisCount: (prevState.thisCount + 1)%2
 			})); 
+			console.log("click character event")
 			console.log(this.state.selectedCharacter)
 		}
+
+
+		/*카드 선택시 쿠키 입력*/
+		let x, y, result = '';
+		let val = document.cookie.split(';');
+		for(let i = 0; i < val.length; i++){
+			x = val[i].substr(0, val[i].indexOf('='));
+			y = val[i].substr(val[i].indexOf('=')+1);
+			x = x.replace(/^\s+|\s+$/g, '');
+			if(x === 'character'){
+				result += y+'/';
+			}
+		}
+		let exdate = new Date();
+		exdate.setDate(exdate.getDate()+1);
+		let cookieValue='character='+result+e.target.textContent+'; expires='+exdate.toUTCString();
+		console.log("cookie value insert")
+		console.log(cookieValue)
+		document.cookie=cookieValue;
 	}
 
 	clickStatsBadge(e) {
@@ -115,6 +153,13 @@ class App extends React.Component {
     	tempNameArray.sort()
     	this.setState({nameArray: this.state.nameArray.concat(tempNameArray)})
     	console.log(tempNameArray)
+	}
+
+	shouldComponentUpdate(nextProps, nextState) {
+		console.log("now : "+this.state.searchInput+" / next : "+nextState.searchInput);
+		
+
+		return true;
 	}
 
     render(){
@@ -138,7 +183,8 @@ class App extends React.Component {
     	// console.log("selectedCount event : " + this.state.selectedCount)
     	// console.log("thisCount event : " + this.state.thisCount)
     	console.log("this is App render cookie");
-    	console.log(documents.cookie)
+    	console.log(document.cookie)
+
 
         return (
         	<div class="container">
@@ -146,6 +192,9 @@ class App extends React.Component {
 				<LolSearch 
 					typeSearchInput={this.typeSearchInput}
 					searchInput={this.state.searchInput}
+					onFocusSearchInput={this.onFocusSearchInput}
+					outFocusSearchInput={this.outFocusSearchInput}
+					selectedFocusState={this.state.selectedFocusState}
 				/>
 				<hr></hr>
 				<LolChracter 
@@ -162,6 +211,5 @@ class App extends React.Component {
         );
     }
 }
-
 
 export default App;
