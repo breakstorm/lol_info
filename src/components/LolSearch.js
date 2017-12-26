@@ -1,11 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 class LolSearch extends React.Component {
 	constructor(props) {
 		super(props);
-		this.state = {
-			search: this.props.searchInput
-		}
 	}
 
 	render() {
@@ -38,9 +36,9 @@ LolSearch.defaultProps = {
 	typeSearchInput: ()=> {console.error('typeSearchInput not defined')},
 	searchInput: ''
 };
-{/*LolSearch.propTypes = {
+LolSearch.propTypes = {
 	typeSearchInput: PropTypes.func,
 	searchInput: PropTypes.string
-}*/}
+}
 
 export default LolSearch;

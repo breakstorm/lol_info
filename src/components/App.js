@@ -33,9 +33,10 @@ class App extends React.Component {
 	}
 
 	clickBadge(e) {
-		{/*console.log("active clickBadge")*/}
+		console.log("active clickBadge")
+		console.log(e.target.firstElementChild.value)
 		this.setState({
-			searchInput: e.target.value
+			searchInput: e.target.firstElementChild.value
 		})
 	}
 
@@ -132,10 +133,13 @@ class App extends React.Component {
 			tempNameArray.push(ChracterJson.keys[i])    		
     	}
     	tempNameArray.sort()
-    	console.log("this is App render");
-    	console.log(tempNameArray);
-    	console.log("selectedCount event : " + this.state.selectedCount)
-    	console.log("thisCount event : " + this.state.thisCount)
+    	// console.log("this is App render");
+    	// console.log(tempNameArray);
+    	// console.log("selectedCount event : " + this.state.selectedCount)
+    	// console.log("thisCount event : " + this.state.thisCount)
+    	console.log("this is App render cookie");
+    	console.log(documents.cookie)
+
         return (
         	<div class="container">
 				<br></br>
