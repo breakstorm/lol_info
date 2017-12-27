@@ -65,8 +65,8 @@ class LolSearch extends React.Component {
 			})
 		}
 
-		const preview = (<div class="card">
-							<ul class="menu">{mapToHistoryContent(this.state.cookieCharacter)}
+		const preview = (<div className="card">
+							<ul className="menu">{mapToHistoryContent(this.state.cookieCharacter)}
 							</ul>
 						</div>)
 		const viewBlank = (<div></div>);
@@ -75,21 +75,21 @@ class LolSearch extends React.Component {
 		return (
 			<div>
 				<h2>LolSearch</h2>
-				<div class="card">
-					<div class="card-body bg-light"
+				<div className="card">
+					<div className="card-body bg-light"
 						 onMouseLeave={(e)=>this.props.outFocusSearchInput(e)}
 					>
-						<div class="input-group">
+						<div className="input-group">
 							<input 
-								class="form-control" 
+								className="form-control" 
 								type="text" 
 								onChange={(e) => {this.props.typeSearchInput(e)}}
 								value={this.props.searchInput}
 								onFocus={(e)=>this.props.onFocusSearchInput(e)}
 								></input>
 
-							<span class="input-group-btn"><button class="btn btn-secondary" type="button">Report</button></span>
-							<span class="input-group-btn"><button class="btn btn-secondary" type="button">Erase</button></span>
+							<span className="input-group-btn"><button className="btn btn-secondary" type="button">Report</button></span>
+							<span className="input-group-btn"><button className="btn btn-secondary" type="button">Erase</button></span>
 						</div>
 						{this.props.selectedFocusState && this.state.cookieCharacter.length ? preview : viewBlank}
 						

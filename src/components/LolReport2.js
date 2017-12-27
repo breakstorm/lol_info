@@ -86,7 +86,7 @@ class LolReport2 extends React.Component {
 
 
 		return (
-			<div class="">
+			<div className="">
 				{this.props.selectedCharacter.length > 0 ? 
 					<div>
 						<h2>LolReport</h2>

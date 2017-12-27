@@ -3,10 +3,8 @@ import ReactDOM from 'react-dom';
 import update from 'react-addons-update';
 import { instanceOf } from 'prop-types';
 
-import Head from './Head';
 import LolSearch from './LolSearch';
 import LolChracter from './LolChracter';
-import LolReport from './LolReport';
 import LolReport2 from './LolReport2';
 import Test from './Test';
 import ChracterState from './../../public/lol-champions.json'
@@ -186,7 +184,7 @@ class App extends React.Component {
 
 
         return (
-        	<div class="container">
+        	<div className="container">
 				<br></br>
 				<LolSearch 
 					typeSearchInput={this.typeSearchInput}
