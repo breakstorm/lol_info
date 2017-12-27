@@ -1,4 +1,6 @@
 # lol chracter status infomation. 
+#### 패치버젼 7.24.2 기준
+
 
 ## 1. Feature
 ### sprint6까지의 진행현황
@@ -6,7 +8,7 @@
 #### - 검색 필터링 
 #### - 단어 선택 필터링 
 #### - 리포트 능력치 선택 가능
-#### - 이전 검색내용 확인 (개발중) 
+#### - 이전 검색내용 선택 가능
 
 ### sprint5까지의 진행현황
 ![teaser](lol-info-teaser01.gif) 
