@@ -7,9 +7,9 @@ class ChracterCard extends React.Component {
 
 	render() {
 		return (
-			<div class="card bg-secondary">
-				<img src="" alt={this.props.key} />
-				<div class="card-img-overlay" onClick={(e)=>{
+			<div className="card bg-secondary">
+				<img src="" alt="" />
+				<div className="card-img-overlay" onClick={(e)=>{
 					this.props.clickCharacter(e);
 			}}>{this.props.data}</div>
 			</div>

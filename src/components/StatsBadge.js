@@ -7,18 +7,18 @@ class StatsBadge extends React.Component{
 
     render(){
         return (
-            <div class="btn-group" data-toggle="buttons">
-			  <label class="btn btn-secondary active"  onClick={this.props.clickStatsBadge}>
-			    <input type="radio" checked autocomplete="off" value="attackdamage"/>attackdamage
+            <div className="btn-group" data-toggle="buttons">
+			  <label className="btn btn-secondary active"  onClick={this.props.clickStatsBadge}>
+			    <input type="radio" defaultChecked autoComplete="off" value="attackdamage"/>attackdamage
 			  </label>
-			  <label class="btn btn-secondary"  onClick={this.props.clickStatsBadge}>
-			    <input type="radio" autocomplete="off" value="armor"/>armor
+			  <label className="btn btn-secondary"  onClick={this.props.clickStatsBadge}>
+			    <input type="radio" autoComplete="off" value="armor"/>armor
 			  </label>
-			  <label class="btn btn-secondary"  onClick={this.props.clickStatsBadge}>
-			    <input type="radio" autocomplete="off" value="hp" />hp
+			  <label className="btn btn-secondary"  onClick={this.props.clickStatsBadge}>
+			    <input type="radio" autoComplete="off" value="hp" />hp
 			  </label>
-			  <label class="btn btn-secondary"  onClick={this.props.clickStatsBadge}>
-			    <input type="radio" autocomplete="off" value="spellblock"/>spellblock
+			  <label className="btn btn-secondary"  onClick={this.props.clickStatsBadge}>
+			    <input type="radio" autoComplete="off" value="spellblock"/>spellblock
 			  </label>
 			</div>
         );

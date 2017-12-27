@@ -1,4 +1,5 @@
 import React from 'react';
+
 import ChracterCard from './ChracterCard';
 import Alphabet from './Alphabet';
 
@@ -32,7 +33,7 @@ class LolChracter extends React.Component {
 					clickBadge={this.props.clickBadge}
 				/>
 				<h1></h1>
-				<div class="card-columns">
+				<div className="card-columns">
 					<div>{mapToCharacterCard(this.props.chracterstate)}</div>
 				</div> 
 			</div>
