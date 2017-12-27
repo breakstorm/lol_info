@@ -21,6 +21,7 @@ class LolSearch extends React.Component {
 			y = value[i].substr(value[i].indexOf('=')+1)
 			if(x === 'character'){
 				let temp = y.split('/');
+				temp = temp.slice(temp.length-5);
 				this.setState({
 					cookieCharacter: this.state.cookieCharacter.concat(temp)
 				})
@@ -51,18 +52,16 @@ class LolSearch extends React.Component {
 		// 									</ul>
 		// 								</div>
 		// 				 : viewBlank);
-		// const preview = (cookieCharacter.length !== 0 ? <div class="card">
-		// 													<ul class="menu">
-		// 													  {mapToHistoryContent(cookieCharacter)}
-		// 													</ul>
-		// 												</div>
-		// 				 : console.error("WTF"));
-		const test = [1, 2, 3, 4];
+		// const preview = (this.state.cookieCharacter.length !== 0 
+		// 	? (<div class="card">
+		// 			<ul class="menu">{mapToHistoryContent(this.state.cookieCharacter)}
+		// 			</ul>
+		// 		</div>)
+		// 	: viewBlank);
 
 		const mapToHistoryContent = (data) => {
-
 			return data.map((v, i) => {
-				return (<HistoryContent data={v} key={i} />)
+				return (<HistoryContent data={v} key={i} clickCharacter={this.props.clickCharacter} />)
 			})
 		}
 
@@ -73,13 +72,13 @@ class LolSearch extends React.Component {
 		const viewBlank = (<div></div>);
 
 		
-		console.log("WTF : ")
-		console.log(this.state.cookieCharacter)
 		return (
 			<div>
 				<h2>LolSearch</h2>
 				<div class="card">
-					<div class="card-body bg-light">
+					<div class="card-body bg-light"
+						 onMouseLeave={(e)=>this.props.outFocusSearchInput(e)}
+					>
 						<div class="input-group">
 							<input 
 								class="form-control" 
@@ -87,13 +86,12 @@ class LolSearch extends React.Component {
 								onChange={(e) => {this.props.typeSearchInput(e)}}
 								value={this.props.searchInput}
 								onFocus={(e)=>this.props.onFocusSearchInput(e)}
-								onMouseLeave={(e)=>this.props.outFocusSearchInput(e)}
 								></input>
 
 							<span class="input-group-btn"><button class="btn btn-secondary" type="button">Report</button></span>
 							<span class="input-group-btn"><button class="btn btn-secondary" type="button">Erase</button></span>
 						</div>
-						{this.props.selectedFocusState ? preview : viewBlank}
+						{this.props.selectedFocusState && this.state.cookieCharacter.length ? preview : viewBlank}
 						
 					</div>
 				</div>

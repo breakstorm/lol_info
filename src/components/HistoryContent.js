@@ -7,9 +7,9 @@ class HistoryContent extends React.Component{
 	}
 
     render(){
-    	console.log("HistoryContent component : " + this.props.data);
+    	// console.log("HistoryContent component : " + this.props.data);
         return (
-            <li><a>{this.props.data}</a></li>
+            <li onClick={(e)=>{this.props.clickCharacter(e)}}>{this.props.data}</li>
         );
     }
 }

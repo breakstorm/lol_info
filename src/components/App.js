@@ -194,6 +194,7 @@ class App extends React.Component {
 					onFocusSearchInput={this.onFocusSearchInput}
 					outFocusSearchInput={this.outFocusSearchInput}
 					selectedFocusState={this.state.selectedFocusState}
+					clickCharacter={this.clickCharacter}
 				/>
 				<hr></hr>
 				<LolChracter 
