@@ -39,8 +39,8 @@ class App extends React.Component {
 	}
 
 	clickBadge(e) {
-		console.log("active clickBadge")
-		console.log(e.target.firstElementChild.value)
+		// console.log("active clickBadge")
+		// console.log(e.target.firstElementChild.value)
 		this.setState({
 			searchInput: e.target.firstElementChild.value
 		})
@@ -52,13 +52,13 @@ class App extends React.Component {
 		})
 	}
 	onFocusSearchInput(e){
-		console.log("onFocusSearchInput event");
+		// console.log("onFocusSearchInput event");
 		this.setState((prevState, props) => {
 			return {selectedFocusState: !prevState.selectedFocusState}
 		})
 	}
 	outFocusSearchInput(e){
-		console.log("outFocusSearchInput event");
+		// console.log("outFocusSearchInput event");
 		this.setState((prevState, props) => {
 			return {selectedFocusState: 0}
 		})	
@@ -74,13 +74,13 @@ class App extends React.Component {
 			selectedReportComponent: 1
 		})
 
-		console.log("clickevent length test : ");
-		console.log(this.state.selectedCharacter.length)
-		console.log(this.state.selectedCharacter)
+		// console.log("clickevent length test : ");
+		// console.log(this.state.selectedCharacter.length)
+		// console.log(this.state.selectedCharacter)
 
 		/* LolReport2 Component에서 사용하는 기능 : 토글 처리문*/
 		if(this.state.selectedCharacter.length > 0){
-			console.log("check please : ")
+			// console.log("check please : ")
 			for(let i = 0; i < this.state.selectedCharacter.length; i++){
 				if(this.state.selectedCharacter[i].name === e.target.textContent){
 					console.log("crush error !!!")
@@ -99,11 +99,10 @@ class App extends React.Component {
 			}
 		}		
 
-		console.log("click test 2")
 		/* LolReport2 Component에서 사용하는 기능 : 해당 캐릭터 정보 저장*/
 		if(this.state.chracterjson.data[e.target.textContent] && this.state.selectedCount < 2 ){
-			console.log("click event clear")
-			console.log(this.state.chracterjson.data[e.target.textContent])
+			// console.log("click event clear")
+			// console.log(this.state.chracterjson.data[e.target.textContent])
 			this.setState({
 				selectedCharacter: this.state.selectedCharacter.concat(this.state.chracterjson.data[e.target.textContent])
 			})
@@ -112,8 +111,8 @@ class App extends React.Component {
 			    selectedCount: prevState.selectedCount + 1,
 			    thisCount: (prevState.thisCount + 1)%2
 			})); 
-			console.log("click character event")
-			console.log(this.state.selectedCharacter)
+			// console.log("click character event")
+			// console.log(this.state.selectedCharacter)
 		}
 
 
@@ -131,14 +130,14 @@ class App extends React.Component {
 		let exdate = new Date();
 		exdate.setDate(exdate.getDate()+1);
 		let cookieValue='character='+result+e.target.textContent+'; expires='+exdate.toUTCString();
-		console.log("cookie value insert")
-		console.log(cookieValue)
+		// console.log("cookie value insert")
+		// console.log(cookieValue)
 		document.cookie=cookieValue;
 	}
 
 	clickStatsBadge(e) {
-		console.log("this is clickStatsBadge")
-		console.log(e.target.firstElementChild.value)
+		// console.log("this is clickStatsBadge")
+		// console.log(e.target.firstElementChild.value)
 		this.setState({
 			statsInput: e.target.firstElementChild.value 
 		})
@@ -146,17 +145,17 @@ class App extends React.Component {
 
 	componentWillMount(){
 		let tempNameArray = [];
-    	console.log(ChracterJson);
+    	// console.log(ChracterJson);
     	for(let i in ChracterJson.keys){
 			tempNameArray.push(ChracterJson.keys[i])    		
     	}
     	tempNameArray.sort()
     	this.setState({nameArray: this.state.nameArray.concat(tempNameArray)})
-    	console.log(tempNameArray)
+    	// console.log(tempNameArray)
 	}
 
 	shouldComponentUpdate(nextProps, nextState) {
-		console.log("now : "+this.state.searchInput+" / next : "+nextState.searchInput);
+		// console.log("now : "+this.state.searchInput+" / next : "+nextState.searchInput);
 		
 
 		return true;
@@ -182,8 +181,8 @@ class App extends React.Component {
     	// console.log(tempNameArray);
     	// console.log("selectedCount event : " + this.state.selectedCount)
     	// console.log("thisCount event : " + this.state.thisCount)
-    	console.log("this is App render cookie");
-    	console.log(document.cookie)
+    	// console.log("this is App render cookie");
+    	// console.log(document.cookie)
 
 
         return (
